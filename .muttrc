@@ -82,6 +82,7 @@ set delete=yes
 #set noconfirmappend # set to skip confirmation for appending mail to folder
 set edit_headers = yes
 unset mark_old # use unset to have NeoMutt leave emails in inbox once read
+unset confirmappend #no prompt for confirmation when moving to IMAP folders
 set pager_stop
 set strict_threads = yes
 set text_flowed #format for soft returns
@@ -131,6 +132,7 @@ color indicator default color68
 color tree color68 default # arrow in threads
 
 # index ----------------------------------------------------------------
+color index color248 default "~R" # Read messages
 color index color28 default "~v~(!~N)" # collapsed thread with no unread
 color index color28 default "~P" # messages from me
 color index color20 default "~l~(!~N)" # messages for List
