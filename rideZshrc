@@ -1,0 +1,53 @@
+# Path to your oh-my-zsh installation.
+ZSH=/usr/share/oh-my-zsh/
+export TERM=xterm-256color
+
+# Theme to load. Or set to "random" for random theme on load
+ZSH_THEME="csmith"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# User configuration
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='mvim'
+ fi
+
+# Compilation flags
+ export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Colored prompts
+autoload -Uz promptinit
+promptinit
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
+setopt RM_STAR_WAIT
+export HISTSIZE=32768;
+export HISTFILESIZE=$HISTSIZE;
+export HISTCONTROL=ignoredups;
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(z archlinux common-aliases git-extras sudo tmux zsh-syntax-highlighting battery)
+
+source $ZSH/oh-my-zsh.sh
+# For a full list of active aliases, run `alias`.
+alias weather='curl wttr.in/02169'
+# Vimpager
+export PAGER=/usr/bin/vimpager
+alias less=$PAGER
+alias zless=$PAGER
+
+# This must be the last line in rc file.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
