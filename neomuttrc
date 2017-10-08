@@ -94,7 +94,7 @@ color sidebar_flagged color231 default
 color sidebar_highlight color68 color230
 color sidebar_ordinary color4 default
 color sidebar_divider color26 default
-color sidebar_indicator default color68
+color sidebar_indicator color51 color68
 color sidebar_spoolfile color26 default
 
 # basic colors {{{2 ---------------------------------------------------------
@@ -105,7 +105,7 @@ color message color51 default # systme messages like new mail
 color attachment color33 default 
 color search color74 default
 color status color218 default # menu
-color indicator default color68
+color indicator color51 color68
 color tree color68 default # arrow in threads
 
 # index ----------------------------------------------------------------
