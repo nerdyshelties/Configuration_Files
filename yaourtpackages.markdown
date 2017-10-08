@@ -73,7 +73,7 @@ extra/intel-ucode 20170707-1
 extra/intltool 0.51.0-3
 community/jshon 20131105-1
 multilib/lib32-libxrandr 1.5.1-1
-core/licenses 20140629-2 (base)
+core/licenses 20171006-1 (base)
 extra/lightsoff 3.26.0+2+g243e6e8-1 (gnome-extra)
 core/linux 4.13.4-1 (base)
 core/logrotate 3.12.3-1 (base)

@@ -73,7 +73,7 @@ intel-ucode 20170707-1
 intltool 0.51.0-3
 jshon 20131105-1
 lib32-libxrandr 1.5.1-1
-licenses 20140629-2
+licenses 20171006-1
 lightsoff 3.26.0+2+g243e6e8-1
 linux 4.13.4-1
 logrotate 3.12.3-1
