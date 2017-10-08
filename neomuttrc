@@ -1,0 +1,153 @@
+# vim: set syntax=muttrc : ##
+## vim: set filetype=muttrc : ## 
+
+# source private files----------------------------------------
+source ~/.mutt/.fastmail
+
+# Sidebar-----------------------------------------------------
+set sidebar_visible = yes
+set sidebar_width = 20
+set sidebar_divider_char = '|'
+    # Enable extended buffy mode to calculate total, new, and flagged
+    # message counts for each mailbox.
+set mail_check_stats
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+    # Sort the mailboxes in the Sidebar using this method:
+    #       count    - total number of messages
+    #       flagged  - number of flagged messages
+    #       new      - number of new messages
+    #       path     - mailbox path
+    #       unsorted - do not sort the mailboxes
+set sidebar_sort_method = 'unsorted'
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager G sidebar-open
+bind index,pager B sidebar-toggle-visible
+
+# Cache--------------------------------------------------------
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+# Status Bar Options-------------------------------------------
+# NeoMutt version / elow, set some defaults
+set status_format='-%r-NeoMutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Sz:%l?]----(%V---%s/%S)-%>-%v---(Index:%P)---'
+# Message Number, message status flags, date, sender, subject, size
+set index_format='%4C %Z %<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]> %-15.15L %s %> (%?l?%4l&%4c?)'
+# sort by threads first then newest email
+set sort=threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+# color status foreground background [ regex [ num ]]
+# Set the default color for the entire status line
+color status color4 color15
+color status color99 default '\([^)]+/[^)]+\)'
+## Then override the color for one specific case
+color status color7 default '\(threads/last-date-received\)'
+# Highlight the mailbox
+color status color15 default 'NeoMutt: ([^ ]+)' 1
+
+# Options---------------------------------------------------
+set imap_idle=yes
+unset imap_passive
+set timeout=15
+set mail_check = 5
+set imap_keepalive = 900
+set editor = "vim '+/^$/+1' %s"
+set pager_index_lines = 10
+set pager_context = 5
+set beep_new
+unset markers # don't show + for wrapped lines
+set delete=yes
+set edit_headers = yes
+unset confirmappend #no prompt for confirmation when moving to IMAP folders
+set pager_stop
+set strict_threads = yes
+set text_flowed #format for soft returns
+
+# Keyboard---------------------------------------------
+bind index "^" imap-fetch-mail
+bind compose p postpone-message
+bind index p recall-message
+bind pager <up> previous-line
+bind pager <down> next-line
+bind pager "[" half-up
+bind pager "]" half-down
+
+# HTML emails----------------------------------------------
+set mailcap_path="~/.mailcap"
+auto_view text/html
+alternative_order text/plain text/html
+
+#alternate email addresses---------------------------------
+source ~/.mutt/.nmalternates
+
+# Alias file email addresses commonly used--------------------
+set alias_file=~/.mutt/aliases
+source $alias_file
+
+# Colors for neomutt sidebar
+color progress default color68
+color sidebar_divider color68 default
+color sidebar_new color51 default
+color sidebar_flagged color231 default
+color sidebar_highlight color68 color230
+color sidebar_ordinary color4 default
+color sidebar_divider color26 default
+color sidebar_indicator default color68
+color sidebar_spoolfile color26 default
+
+# basic colors {{{2 ---------------------------------------------------------
+color normal color195 default #read emails
+color error color160 default #error messages shown beneath index and sidebar
+color tilde color51 default # character used to pad blank lines in pager
+color message color51 default # systme messages like new mail
+color attachment color33 default 
+color search color74 default
+color status color218 default # menu
+color indicator default color68
+color tree color68 default # arrow in threads
+
+# index ----------------------------------------------------------------
+color index color248 default "~R" # read messages
+color index color28 default "~v~(!~N)" # collapsed thread with no unread
+color index color28 default "~P" # messages from me
+color index color20 default "~l~(!~N)" # messages for List
+color index color189 default "~Q" # messages that have been replied to
+color index color35 default "~v~(~F)!~N" # collapsed thread with flagged, no unread
+color index color225 default "~F" # flagged messages
+color index_flags color196 default '~F' #highlight the flags for flagged (~F) emails
+color index_flags color227 default '~N' #highlight flags for new mail
+color index color86 default "~U" # unread messages
+color index color230 default "~N" # new messages
+color index color86 default "~O" # old messages
+color index color51 default "~N~p!~F" # new messages to me
+color index color86 default "~v~(~N)" # collapsed thread with some unread
+color index color86 default "~N~v~(~N)" # collapsed thread with unread parent
+color index color86 default "~v~(~F~N)" # collapsed thread with some unread & flagged
+color index default color164 "~v~(~D)" # thread with deleted (doesn't differentiate between all or partial)
+color index default color164 "~D" # deleted messages
+# index-special highlighting for the SENDER-------------------------------
+source ~/.mutt/.nmsenders
+
+# message headers {{{2 ------------------------------------------------------
+
+color hdrdefault color39 default
+color header color51 default "^(From)"
+color header color51 default "^(Subject)"
+color header color87 default "^(X-)"
+color header color87 default "^(User-Agent)"
+
+# body {{{2 -----------------------------------------------------------------
+
+color quoted color134 default
+color quoted1 color116 default
+color quoted2 color176 default
+color quoted3 color110 default
+color quoted4 color170 default
+
+color signature color39 default
+color bold color219 default
+color underline color195 default
+
+color body color45 default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
