@@ -126,7 +126,7 @@ color index color86 default "~v~(~N)" # collapsed thread with some unread
 color index color86 default "~N~v~(~N)" # collapsed thread with unread parent
 color index color86 default "~v~(~F~N)" # collapsed thread with some unread & flagged
 color index default color164 "~v~(~D)" # thread with deleted (doesn't differentiate between all or partial)
-color index default color164 "~D" # deleted messages
+color index color196 default "~D" # deleted messages
 # index-special highlighting for the SENDER-------------------------------
 source ~/.mutt/.nmsenders
 
