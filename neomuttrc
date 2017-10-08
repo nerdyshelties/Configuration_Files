@@ -116,8 +116,8 @@ color index color20 default "~l~(!~N)" # messages for List
 color index color189 default "~Q" # messages that have been replied to
 color index color35 default "~v~(~F)!~N" # collapsed thread with flagged, no unread
 color index color225 default "~F" # flagged messages
-color index_flags color196 default '~F' #highlight the flags for flagged (~F) emails
-color index_flags color227 default '~N' #highlight flags for new mail
+color index_flags color196 default "~F" #highlight the flags for flagged (~F) emails
+color index_flags color227 default "~N" #highlight flags for new mail
 color index color86 default "~U" # unread messages
 color index color230 default "~N" # new messages
 color index color86 default "~O" # old messages
@@ -125,8 +125,9 @@ color index color51 default "~N~p!~F" # new messages to me
 color index color86 default "~v~(~N)" # collapsed thread with some unread
 color index color86 default "~N~v~(~N)" # collapsed thread with unread parent
 color index color86 default "~v~(~F~N)" # collapsed thread with some unread & flagged
-color index default color164 "~v~(~D)" # thread with deleted (doesn't differentiate between all or partial)
-color index color196 default "~D" # deleted messages
+color index color88 default "~D" # deleted messages
+color index_flags color196 default "~D" # make the deleted flag pop
+
 # index-special highlighting for the SENDER-------------------------------
 source ~/.mutt/.nmsenders
 
