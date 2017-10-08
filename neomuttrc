@@ -2,7 +2,7 @@
 ## vim: set filetype=muttrc : ## 
 
 # source private files----------------------------------------
-source ~/.mutt/.fastmail
+source ~/.mutt/.nmfastmail
 
 # Sidebar-----------------------------------------------------
 set sidebar_visible = yes
