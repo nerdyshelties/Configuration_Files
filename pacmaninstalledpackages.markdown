@@ -16,7 +16,7 @@ epiphany 3.26.1-1
 evolution 3.26.1-1
 fakeroot 1.22-1
 file-roller 3.26.1-1
-firefox 56.0-1
+firefox 56.0.1-1
 five-or-more 3.26.0-1
 flex 2.6.4-1
 four-in-a-row 3.22.2+5+g9021ef9-1
@@ -27,7 +27,7 @@ gnome-2048 3.26.1-1
 gnome-backgrounds 3.26.2-1
 gnome-builder 3.26.1-1
 gnome-calculator 3.25.92+11+g1e9e84b0-1
-gnome-calendar 3.26.1-1
+gnome-calendar 3.26.2-1
 gnome-characters 3.26.1-1
 gnome-chess 3.26.0-1
 gnome-clocks 3.26.0-1
@@ -93,8 +93,8 @@ pdfminer 20140328-2
 perl-image-exiftool 10.55-2
 polari 3.26.1-1
 pstotext 1.9-3
-python-html2text 2016.9.19-2
-python2-html2text 2016.9.19-2
+python-html2text 2017.10.4-1
+python2-html2text 2017.10.4-1
 quadrapassel 3.22.0-1
 rtfreader 1-1
 seahorse 3.20.0+105+gb31e32fe-1
@@ -118,7 +118,6 @@ w3m 0.5.3.git20170102-2
 weston 3.0.0-1
 which 2.21-2
 xdg-user-dirs-gtk 0.10+9+g5b7efc6-1
-xmobar 0.24.5-6
 xv 3.10a-22
 yaourt 1.9-1
 zsh-syntax-highlighting 0.6.0-1

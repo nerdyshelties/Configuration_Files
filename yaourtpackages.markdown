@@ -27,7 +27,7 @@ extra/gnome-2048 3.26.1-1 (gnome-extra)
 extra/gnome-backgrounds 3.26.2-1 (gnome)
 extra/gnome-builder 3.26.1-1 (gnome-extra)
 extra/gnome-calculator 3.25.92+11+g1e9e84b0-1 (gnome)
-extra/gnome-calendar 3.26.1-1 (gnome-extra)
+extra/gnome-calendar 3.26.2-1 (gnome-extra)
 extra/gnome-characters 3.26.1-1 (gnome-extra)
 extra/gnome-chess 3.26.0-1 (gnome-extra)
 extra/gnome-clocks 3.26.0-1 (gnome-extra)
@@ -93,8 +93,8 @@ local/pdfminer 20140328-2
 extra/perl-image-exiftool 10.55-2
 extra/polari 3.26.1-1 (gnome-extra)
 community/pstotext 1.9-3
-community/python-html2text 2016.9.19-2
-community/python2-html2text 2016.9.19-2
+community/python-html2text 2017.10.4-1
+community/python2-html2text 2017.10.4-1
 extra/quadrapassel 3.22.0-1 (gnome-extra)
 local/rtfreader 1-1
 extra/seahorse 3.20.0+105+gb31e32fe-1 (gnome-extra)
