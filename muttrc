@@ -1,0 +1,85 @@
+# Generic settings for mutt
+
+# Variable settings; see the mutt manual for details on most of these:
+set abort_nosubject
+set allow_ansi
+set beep_new
+set charset="utf-8"
+unset confirmappend
+set date_format="!%d %b %Y, %H:%M:%S %Z"
+set edit_headers
+# Path to my preferred editor:
+set editor="/usr/pkg/bin/vim"
+set fast_reply
+unset followup_to
+set forward_format="Fwd: %s"
+set forward_quote
+set hostname="sdf.lonestar.org"
+set include
+set mail_check=60
+set mime_forward=ask-no
+set pager_context=2
+set postpone
+set read_inc=50
+unset recall
+set reply_to
+unset resolve
+unset save_empty
+unset score
+set send_charset="us-ascii:utf-8"
+set sendmail_wait=30
+# Get my signature from a fortune file in my home directory:
+set signature="fortune ~/share/sigs/sigfile |"
+set sort=reverse-date
+set sort_aux=last-date
+set strict_threads
+set tilde
+set timeout=300
+# Like 'editor', but different:
+set visual="/usr/pkg/bin/vim"
+set delete=yes
+# Format of entries in mailbox listings:
+set index_format="%Z%T %-16.16F  %-40.40s %> %{%d %b %Y}"
+set move=ask-yes
+# This setting is primarily used in connecting securely to Gmail's IMAP server:
+set certificate_file="~/.mutt/certs"
+set wrap=80
+# Set the status line at the bottom of the screen:
+set status_format="%v -%r- %f -- %m msgs%?u?, %u unread?%?d?, %d del?%?t?, %t tagged? %?V?-- %V : %M -- ?%> %P"
+# Don't show a help line at the top of the screen:
+unset help
+
+# Don't show unnecessary mail headers
+ignore Received Delivered-To X-Planation Return-Path Authentication-Results
+ignore DKIM-Signature Message-ID MIME-Version References In-Reply-To Content-
+ignore X-Spam X-ecartis DomainKey-Signature X-Junkmail
+
+unignore Content-Type
+
+# Append this header to all outgoing e-mails:
+my_hdr Organization: SDF Public Access UNIX System <http://sdf.lonestar.org>
+
+# Order in which to show certain headers:
+hdr_order From: Organization: Subject: Date: To: Cc: Reply-to: X-Face:
+
+# Settings for automatically viewing certain MIME types:
+auto_view text/html message/rfc822 application/x-tar-gz
+alternative_order text/plain text/html application/html text/*
+
+# Macros for switching between my SDF account & my Gmail account (account-hooks
+# didn't seem to fit my needs)
+# The SDF macro would have been bound to 'S', but I already mapped that key to
+# save changes to the current mailbox, so I chose 'X' for UNIX.
+macro index X ":source ~/.mutt/sdf<enter>c!<enter>" "Load SDF account"
+macro index G ":source ~/.mutt/gmail<enter>c!<enter>" "Load Gmail account"
+
+# Macros for use in switching mailboxes (yes, I'm that lazy):
+macro index + '<change-folder>+' "Change to folder in mailbox"
+macro index = '<change-folder>=' "Change to folder in mailbox"
+
+# Process commands in other files:
+source ~/.mutt/gpg
+source ~/.mutt/keys
+
+# Start out with the SDF account:
+source ~/.mutt/sdf
