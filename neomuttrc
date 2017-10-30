@@ -35,7 +35,7 @@ set status_format='-%r-NeoMutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? 
 
 # Pager Options-----------------------------------------------
 # Pager Options Message Number, message status flags, date, sender, subject, size
-set index_format='%4C %Z %<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]> %-15.15L %s %> %?X?%X📎? (%4c)'
+set index_format='%4C %zs %zt %<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]> %-15.15L %s %> %?X?%X📎? (%4c)'
 # sort by threads first then newest email
 set sort=threads
 set sort_browser=date
