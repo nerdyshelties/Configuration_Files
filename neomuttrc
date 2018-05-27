@@ -2,9 +2,64 @@
 ## vim: set filetype=muttrc : ## 
 
 # source private files----------------------------------------
-source ~/.mutt/.nmfastmail
+source ~/docs/keys/mail
 
-# Sidebar-----------------------------------------------------
+# to use notmuch's tagging features,
+# use virtual-mailboxes instead of mailboxes
+# set spoolfile=+INBOX
+# mailboxes +INBOX +Archive +Sent +Trash
+set virtual_spoolfile # use first defined virtual-mailbox as spool
+virtual-mailboxes "INBOX" "notmuch://?query=folder:INBOX"
+virtual-mailboxes "Archive" "notmuch://?query=folder:Archive"
+virtual-mailboxes "Sent" "notmuch://?query=folder:Sent"
+virtual-mailboxes "Trash" "notmuch://?query=folder:Trash"
+virtual-mailboxes "tax" "notmuch://?query=tag:tax"
+virtual-mailboxes "receipts" "notmuch://?query=tag:receipts"
+virtual-mailboxes "techstuff" notmuch://?query=tag:techstuff"
+
+# --------------------------------------------------------------------------
+# FUNCTIONS - shown with an example mapping
+# --------------------------------------------------------------------------
+# modify (notmuch/imap) tags
+bind index,pager \` modify-labels
+# modify (notmuch/imap) tag non-interactively.
+#bind index,pager tt "<modify-labels>!todo\n"
+# "Toggle the 'todo' tag"
+# modify labels and then hide message
+# bind index,pager ??? modify-labels-then-hide
+# --------------------------------------------------------------------------
+# COMMANDS - shown with an example
+# --------------------------------------------------------------------------
+# Replace some tags with icons
+tag-transforms tag transformed-string { tag transformed-string ...}
+tag-transforms "inbox"   "i"   \
+               "unread"  "u"   \
+               "replied" "↻ "  \
+               "sent"    "➥ "  \
+               "todo"    "T"   \
+               "deleted" "DEL" \
+               "invites" "CAL"
+
+# The formats must start with 'G' and the entire sequence is case sensitive.
+tag-formats tag format-string { tag format-string ...}
+tag-formats "inbox"   "GI" \
+             "unread"  "GU" \
+             "replied" "GR" \
+             "sent"    "GS" \
+             "todo"    "Gt" \
+             "deleted" "GD" \
+             "invites" "Gi"
+
+# Now instead of using '%g' or '%J' in your $index_format, which lists all tags
+# in a non-deterministic order, you can something like the following which puts
+# a transformed tag name in a specific spot on the index line:
+set index_format='%4C %S %[%y.%m.%d] %-18.18n %?GU?%GU& ? %?GR?%GR& ? %?GI?%GI& ? %s'
+
+# The %G formatting sequence may display all tags including tags hidden by
+# nm_hidden_tags.
+#
+#
+## Sidebar-----------------------------------------------------
 set sidebar_visible = yes
 set sidebar_width = 20
 set sidebar_divider_char = '|'
@@ -35,7 +90,7 @@ set status_format='-%r-NeoMutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? 
 
 # Pager Options-----------------------------------------------
 # Pager Options Message Number, message status flags, date, sender, subject, size
-set index_format='%4C %zs %zt %<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]> %-15.15L %s %> %?X?%X📎? (%4c)'
+#set index_format='%4C %zs %zt %<[y?%<[d?%[%H:%M]&%[%m/%d]>&%[%y.%m]> %-15.15L %s %> %?X?%Xattach? (%4c)'
 # sort by threads first then newest email
 set sort=threads
 set sort_browser=date
@@ -68,7 +123,7 @@ set strict_threads = yes
 set text_flowed #format for soft returns
 
 # Keyboard---------------------------------------------
-bind index "^" imap-fetch-mail
+#bind index "^" imap-fetch-mail
 bind compose p postpone-message
 bind index p recall-message
 bind pager <up> previous-line
@@ -80,6 +135,54 @@ bind pager "]" half-down
 set mailcap_path="~/.mailcap"
 auto_view text/html
 alternative_order text/plain text/html
+#bind attach <return> view-mailcap
+# press <enter> in the pager to view first attachment
+# useful for quickly seeing html
+#macro pager <return> "v<return>q"
+
+# save attachments to directory
+macro attach s <save-entry><bol>~/downloads/<eol>
+
+# suppress "press any key to continue"
+unset wait_key
+
+# faster switching of mailboxes
+set sleep_time=0
+
+# go to first entry instead of first unread entry
+# when loading a folder
+folder-hook . 'push <first-entry>'
+
+# move email to archive
+macro index,pager A ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n"
+
+# notifications
+# unfortunately these don't have access to info like subjects or senders
+set new_mail_command="notify-send 'New email' '%n new message(s)' &"
+
+# notmuch--
+# https://www.neomutt.org/feature/notmuch
+
+# search
+# `man notmuch-search-terms` for syntax
+macro index,pager S "<vfolder-from-query>"
+
+# add/remove tags
+# use `-<TAG>` to remove tag
+bind index,pager Y modify-labels
+
+# filter tags
+bind index,pager Y modify-labels
+macro index \Cy "<vfolder-from-query>tag:" "Limit view to tag"
+
+# b/c we're using notmuch virtual folders,
+# re-bind `c` from <change-folder>
+bind index,pager c change-vfolder
+
+# shortcuts to folders
+#macro index,pager gi "<change-vfolder>INBOX<Enter>"
+#macro index,pager ga "<change-vfolder>Archive<Enter>"
+# --notmuch
 
 #alternate email addresses---------------------------------
 source ~/.mutt/.nmalternates
